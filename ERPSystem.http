@@ -1,6 +1,204 @@
-@ERPSystem_HostAddress = http://localhost:5050
+@baseUrl = http://localhost:5050/api/seed
 
-GET {{ERPSystem_HostAddress}}/weatherforecast/
-Accept: application/json
+### ===================== DEPARTMENT =====================
+POST {{baseUrl}}/department
+Content-Type: application/json
+
+{
+  "name": "Management"
+}
+
+### ===================== COURSE PROGRAM =====================
+POST {{baseUrl}}/program
+Content-Type: application/json
+
+{
+  "name": "BBA",
+  "duration": 3,
+  "departmentId": 18
+}
 
 ###
+POST {{baseUrl}}/program
+Content-Type: application/json
+
+{
+  "name": "MBA",
+  "duration": 2,
+  "departmentId": 18
+}
+
+###
+POST {{baseUrl}}/program
+Content-Type: application/json
+
+{
+  "name": "PhD",
+  "duration": 3,
+  "departmentId": 18
+}
+
+### ===================== SEMESTER =====================
+POST {{baseUrl}}/semester
+Content-Type: application/json
+
+{
+  "semesterName": "Semester 1",
+  "programId": 1
+}
+
+###
+POST {{baseUrl}}/semester
+Content-Type: application/json
+
+{
+  "semesterName": "Semester 2",
+  "programId": 1
+}
+###
+POST {{baseUrl}}/semester
+Content-Type: application/json
+
+{
+  "semesterName": "Semester 3",
+  "programId": 1
+}
+###
+POST {{baseUrl}}/semester
+Content-Type: application/json
+
+{
+  "semesterName": "Semester 4",
+  "programId": 1
+}
+###
+POST {{baseUrl}}/semester
+Content-Type: application/json
+
+{
+  "semesterName": "Semester 5",
+  "programId": 1
+}
+###
+POST {{baseUrl}}/semester
+Content-Type: application/json
+
+{
+  "semesterName": "Semester 6",
+  "programId": 1
+}
+###
+POST {{baseUrl}}/semester
+Content-Type: application/json
+
+{
+  "semesterName": "Semester 7",
+  "programId": 1
+}
+###
+POST {{baseUrl}}/semester
+Content-Type: application/json
+
+{
+  "semesterName": "Semester 8",
+  "programId": 1
+}
+
+### ===================== CLASS =====================
+POST {{baseUrl}}/class
+Content-Type: application/json
+
+{
+  "className": "CS-B",
+  "capacity": 60,
+  "semesterId": 1
+}
+
+### ===================== SUBJECT =====================
+POST {{baseUrl}}/subject
+Content-Type: application/json
+
+{
+  "name": "Data Structures",
+  "credits": 4
+}
+
+### ===================== USER (FOR TEACHER / ADMIN) =====================
+POST {{baseUrl}}/user
+Content-Type: application/json
+
+{
+  "email": "student@gmail.com",
+  "password": "1234567",
+  "role": "Student"
+}
+
+### ===================== TEACHER =====================
+POST {{baseUrl}}/teacher
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "teacherId": 101,
+  "teacherName": "Dr. Sharma",
+  "departmentId": 1
+}
+
+### ===================== CLASS SEMESTER SUBJECT =====================
+POST {{baseUrl}}/class-subject
+Content-Type: application/json
+
+{
+  "classId": 1,
+  "semesterId": 1,
+  "subjectId": 1,
+  "teacherId": 1
+}
+
+### ===================== STUDENT =====================
+POST {{baseUrl}}/student
+Content-Type: application/json
+
+{
+  "userId": 2,
+  "fullName": "Manoj",
+  "universityRollNo": 1001,
+  "classRollNo": 1,
+  "classId": 1
+}
+
+### ===================== ATTENDANCE =====================
+POST {{baseUrl}}/attendance
+Content-Type: application/json
+
+{
+  "studentId": 1,
+  "classSubjectId": 1,
+  "isPresent": true
+}
+
+###
+GET http://localhost:5050/api/department
+Content-Type: application/json
+{
+
+}
+
+###
+GET http://localhost:5050/api/program/by-department/18
+Content-Type: application/json
+{
+}
+
+###
+GET http://localhost:5050/api/semester/by-program/1
+Content-Type: application/json
+{
+}
+
+
+###
+GET http://localhost:5050/api/class/by-semester/1
+Content-Type: application/json
+{
+}
