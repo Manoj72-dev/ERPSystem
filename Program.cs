@@ -1,4 +1,5 @@
 using ERPSystem.Data;
+using ERPSystem.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -6,8 +7,21 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:5173")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials(); 
+    });
+});
+
 builder.Services.AddDbContext<AppDbContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<ISubjectQueryService, SubjectQueryService>();
+builder.Services.AddScoped<IAttendanceQueryService, AttendanceQueryService>();
 
 builder.Services.AddControllers();
 
@@ -34,8 +48,9 @@ builder.Services.AddAuthentication(options =>
 
 
 var app = builder.Build();
-app.MapControllers();
+app.UseCors("AllowFrontend");
+
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.MapControllers();
 app.Run();

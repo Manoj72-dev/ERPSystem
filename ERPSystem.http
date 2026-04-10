@@ -1,4 +1,4 @@
-@baseUrl = http://localhost:5050/api/seed
+@baseUrl = http://localhost:5050/api
 
 ### ===================== DEPARTMENT =====================
 POST {{baseUrl}}/department
@@ -44,7 +44,7 @@ Content-Type: application/json
 
 {
   "semesterName": "Semester 1",
-  "programId": 1
+  "programId": 53
 }
 
 ###
@@ -53,7 +53,7 @@ Content-Type: application/json
 
 {
   "semesterName": "Semester 2",
-  "programId": 1
+  "programId": 53
 }
 ###
 POST {{baseUrl}}/semester
@@ -61,7 +61,7 @@ Content-Type: application/json
 
 {
   "semesterName": "Semester 3",
-  "programId": 1
+  "programId": 53
 }
 ###
 POST {{baseUrl}}/semester
@@ -69,7 +69,7 @@ Content-Type: application/json
 
 {
   "semesterName": "Semester 4",
-  "programId": 1
+  "programId": 53
 }
 ###
 POST {{baseUrl}}/semester
@@ -77,7 +77,7 @@ Content-Type: application/json
 
 {
   "semesterName": "Semester 5",
-  "programId": 1
+  "programId": 52
 }
 ###
 POST {{baseUrl}}/semester
@@ -85,33 +85,17 @@ Content-Type: application/json
 
 {
   "semesterName": "Semester 6",
-  "programId": 1
-}
-###
-POST {{baseUrl}}/semester
-Content-Type: application/json
-
-{
-  "semesterName": "Semester 7",
-  "programId": 1
-}
-###
-POST {{baseUrl}}/semester
-Content-Type: application/json
-
-{
-  "semesterName": "Semester 8",
-  "programId": 1
+  "programId": 52
 }
 
 ### ===================== CLASS =====================
-POST {{baseUrl}}/class
+POST http://localhost:5050/api/seed/class
 Content-Type: application/json
 
 {
-  "className": "CS-B",
+  "className": "CS-C",
   "capacity": 60,
-  "semesterId": 1
+  "semesterId": 3
 }
 
 ### ===================== SUBJECT =====================
@@ -119,7 +103,7 @@ POST {{baseUrl}}/subject
 Content-Type: application/json
 
 {
-  "name": "Data Structures",
+  "name": Basic Electrical Engineering",
   "credits": 4
 }
 
@@ -128,9 +112,9 @@ POST {{baseUrl}}/user
 Content-Type: application/json
 
 {
-  "email": "student@gmail.com",
-  "password": "1234567",
-  "role": "Student"
+  "email": "teacher3@gmail.com",
+  "password": "123456",
+  "role": "Teacher"
 }
 
 ### ===================== TEACHER =====================
@@ -202,3 +186,34 @@ GET http://localhost:5050/api/class/by-semester/1
 Content-Type: application/json
 {
 }
+
+###
+GET http://localhost:5050/api/student/by-class/1
+Content-Type: application/json
+{
+}
+
+###=============LOGIN==================================
+POST http://localhost:5050/api/auth/login
+Content-Type: application/json
+{
+  "Email": "student@gmail.com",
+  "Password": "1234567"
+}
+
+###
+GET http://localhost:5050/api/class/1/subjects
+Content-Type: application/json
+{
+  
+}
+
+
+
+### 5) Logged-in student self attendance
+GET http://localhost:5050/api/attendance/student/attendance
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJzdHVkZW50QGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlN0dWRlbnQiLCJleHAiOjE3NzU4MjkwNTIsImlzcyI6IkVSUFN5c3RlbSIsImF1ZCI6IkVSUFVzZXJzIn0.tZ2fEAIw20gl9BI9ioy2CRotvoHGa6W6YzBVxGTGbno
+
+###
+GET http://localhost:5050/api/attendance/student/1/class/1/overview
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJzdHVkZW50QGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlN0dWRlbnQiLCJleHAiOjE3NzU4MjkwNTIsImlzcyI6IkVSUFN5c3RlbSIsImF1ZCI6IkVSUFVzZXJzIn0.tZ2fEAIw20gl9BI9ioy2CRotvoHGa6W6YzBVxGTGbno

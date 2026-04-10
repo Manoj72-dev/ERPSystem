@@ -13,33 +13,36 @@ namespace ERPSystem.Data
         {
             modelBuilder.Entity<ClassSemesterSubject>()
                 .HasOne(c => c.Class)
-                .WithMany(c => c.ClassSubjects) // ✅ FIXED
+                .WithMany(c => c.ClassSubjects) 
                 .HasForeignKey(c => c.ClassId)
                 .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<ClassSemesterSubject>()
                 .HasOne(c => c.Semester)
-                .WithMany() // ok if no navigation property
+                .WithMany() 
                 .HasForeignKey(c => c.SemesterId)
                 .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<ClassSemesterSubject>()
                 .HasOne(c => c.Subject)
-                .WithMany(s => s.ClassSubjects) // ✅ if exists
+                .WithMany(s => s.ClassSubjects) 
                 .HasForeignKey(c => c.SubjectId)
                 .OnDelete(DeleteBehavior.NoAction);
             
             modelBuilder.Entity<ClassSemesterSubject>()
-    .HasOne(c => c.Teacher)
-    .WithMany(t => t.ClassSubjects)
-    .HasForeignKey(c => c.TeacherId)
-    .OnDelete(DeleteBehavior.NoAction);
+                .HasOne(c => c.Teacher)
+                .WithMany(t => t.ClassSubjects)
+                .HasForeignKey(c => c.TeacherId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Attendance>()
                 .HasIndex(a => new { a.StudentId, a.ClassSubjectId, a.Date })
                 .IsUnique();
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.Email)
+                .IsUnique();
+            modelBuilder.Entity<Subject>()
+                .HasIndex(s => s.Code)
                 .IsUnique();
         }
             

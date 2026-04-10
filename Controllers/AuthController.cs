@@ -23,10 +23,11 @@ namespace ERPSystem.Controllers
         public IActionResult Login(LoginDto dto)
         {
             var user = _context.Users.FirstOrDefault(u => u.Email == dto.Email);
-            if(user == null)
-                return Unauthorized("User not found");
-            if(user.Password != dto.Password)
-                return Unauthorized("Invalid password");
+            if (user == null)
+                return Unauthorized(new { message = "User not found" });
+
+            if (!BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))
+                return Unauthorized(new { message = "Invalid password" });
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
